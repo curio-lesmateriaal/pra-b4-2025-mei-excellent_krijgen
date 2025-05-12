@@ -14,43 +14,45 @@ namespace PRA_B4_FOTOKIOSK.controller
         // De window die we laten zien op het scherm
         public static Home Window { get; set; }
 
-
-        // De lijst met fotos die we laten zien
+        // De lijst met foto's die we laten zien
         public List<KioskPhoto> PicturesToDisplay = new List<KioskPhoto>();
-        
-        
-        // Start methode die wordt aangeroepen wanneer de foto pagina opent.
+
+        // Start methode die wordt aangeroepen wanneer de foto pagina opent
         public void Start()
         {
-
-            // Initializeer de lijst met fotos
-            // WAARSCHUWING. ZONDER FILTER LAADT DIT ALLES!
-            // foreach is een for-loop die door een array loopt
-            foreach (string dir in Directory.GetDirectories(@"../../../fotos"))
+            try
             {
-                /**
-                 * dir string is de map waar de fotos in staan. Bijvoorbeeld:
-                 * \fotos\0_Zondag
-                 */
-                foreach (string file in Directory.GetFiles(dir))
-                {
-                    /**
-                     * file string is de file van de foto. Bijvoorbeeld:
-                     * \fotos\0_Zondag\10_05_30_id8824.jpg
-                     */
-                    PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
-                }
-            }
+                // Initializeer de lijst met foto's
+                // WAARSCHUWING. ZONDER FILTER LAADT DIT ALLES!
+                PicturesToDisplay.Clear(); // Clear the previous list of pictures
 
-            // Update de fotos
-            PictureManager.UpdatePictures(PicturesToDisplay);
+                foreach (string dir in Directory.GetDirectories(@"../../../fotos"))
+                {
+                    foreach (string file in Directory.GetFiles(dir))
+                    {
+                        // Filter for image files if necessary (e.g., only .jpg, .png)
+                        if (file.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || file.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                        {
+                            PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
+                        }
+                    }
+                }
+
+                // Update de foto's
+                PictureManager.UpdatePictures(PicturesToDisplay);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (could be expanded for specific file errors, etc.)
+                Console.WriteLine($"Error while loading photos: {ex.Message}");
+            }
         }
 
         // Wordt uitgevoerd wanneer er op de Refresh knop is geklikt
         public void RefreshButtonClick()
         {
-
+            // Reload the pictures when the refresh button is clicked
+            Start();
         }
-
     }
 }
