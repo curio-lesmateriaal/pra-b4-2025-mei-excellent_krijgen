@@ -25,15 +25,14 @@
                         <ColumnDefinition Width="124*"/>
                     </Grid.ColumnDefinitions>
                     <ScrollViewer Margin="20,10,0,43" Grid.ColumnSpan="4">
-                        <!-- WrapPanel to display images -->
-                        <WrapPanel x:Name="spPictures">
-                            <!-- Images will be added here dynamically -->
-                        </WrapPanel>
+                        <!-- Changed from WrapPanel to UniformGrid -->
+                        <UniformGrid x:Name="spPictures" Columns="4" Margin="10"/>
                     </ScrollViewer>
                     <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="20,998,0,0" VerticalAlignment="Top" Width="84" Height="28" Click="btnRefresh_Click" BorderBrush="Black" Background="#FF11FF00" FontSize="20" RenderTransformOrigin="2.402,-5.669"/>
                 </Grid>
             </TabItem>
 
+            <!-- Kassa Tab -->
             <TabItem Header="Kassa">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -56,6 +55,7 @@
                 </Grid>
             </TabItem>
 
+            <!-- Zoeken Tab -->
             <TabItem Header="Zoeken">
                 <Grid>
                     <Grid.ColumnDefinitions>
