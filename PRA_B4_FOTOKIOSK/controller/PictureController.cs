@@ -14,33 +14,31 @@ namespace PRA_B4_FOTOKIOSK.controller
         // De window die we laten zien op het scherm
         public static Home Window { get; set; }
 
+
         // De lijst met fotos die we laten zien
         public List<KioskPhoto> PicturesToDisplay = new List<KioskPhoto>();
-
+        
+        
         // Start methode die wordt aangeroepen wanneer de foto pagina opent.
         public void Start()
         {
-            // Haal het dagnummer van vandaag op
-            int todayDayNumber = (int)DateTime.Now.DayOfWeek;
 
             // Initializeer de lijst met fotos
+            // WAARSCHUWING. ZONDER FILTER LAADT DIT ALLES!
+            // foreach is een for-loop die door een array loopt
             foreach (string dir in Directory.GetDirectories(@"../../../fotos"))
             {
-                // Haal het mapnummer op (eerste deel van de mapnaam)
-                string folderName = Path.GetFileName(dir);
-                string[] folderParts = folderName.Split('_');
-
-                if (folderParts.Length > 0 && int.TryParse(folderParts[0], out int folderDayNumber))
+                /**
+                 * dir string is de map waar de fotos in staan. Bijvoorbeeld:
+                 * \fotos\0_Zondag
+                 */
+                foreach (string file in Directory.GetFiles(dir))
                 {
-                    // Controleer of het mapnummer overeenkomt met het dagnummer van vandaag
-                    if (folderDayNumber == todayDayNumber)
-                    {
-                        // Voeg alle foto's uit deze map toe
-                        foreach (string file in Directory.GetFiles(dir))
-                        {
-                            PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
-                        }
-                    }
+                    /**
+                     * file string is de file van de foto. Bijvoorbeeld:
+                     * \fotos\0_Zondag\10_05_30_id8824.jpg
+                     */
+                    PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
                 }
             }
 
@@ -51,9 +49,8 @@ namespace PRA_B4_FOTOKIOSK.controller
         // Wordt uitgevoerd wanneer er op de Refresh knop is geklikt
         public void RefreshButtonClick()
         {
-            // Herlaad de foto's
-            PicturesToDisplay.Clear();
-            Start();
+
         }
+
     }
 }

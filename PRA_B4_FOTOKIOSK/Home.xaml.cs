@@ -2,50 +2,36 @@
 using PRA_B4_FOTOKIOSK.magie;
 using PRA_B4_FOTOKIOSK.models;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PRA_B4_FOTOKIOSK
 {
-    /// <summary>
-    /// Interaction logic for Home.xaml
-    /// </summary>
     public partial class Home : Window
     {
-
         public ShopController ShopController { get; set; }
         public PictureController PictureController { get; set; }
         public SearchController SearchController { get; set; }
 
         public Home()
         {
-            // Bouw de UI
             InitializeComponent();
 
-            // Stel de manager in
-            PictureManager.Instance = this;
-            ShopManager.Instance = this;
-            ShopController.Window = this;
-            PictureController.Window = this;
-            SearchController.Window = this;
-
-            // Maak de controllers
+            // Maak eerst de controllers aan
             ShopController = new ShopController();
             PictureController = new PictureController();
             SearchController = new SearchController();
 
-            // Start de paginas
+            // Zet dit window in de managers
+            PictureManager.Instance = this;
+            ShopManager.Instance = this;
+
+            // Koppel window aan controllers
+            ShopController.Window = this;
+            PictureController.Window = this;
+            SearchController.Window = this;
+
+            // Start controllers
             PictureController.Start();
             ShopController.Start();
             SearchController.Start();
