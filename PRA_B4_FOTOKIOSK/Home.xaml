@@ -24,8 +24,11 @@
                         <ColumnDefinition Width="431*"/>
                         <ColumnDefinition Width="124*"/>
                     </Grid.ColumnDefinitions>
-                    <ScrollViewer Margin="20,10,0,66" Grid.ColumnSpan="4">
-                        <WrapPanel x:Name="spPictures"/>
+                    <ScrollViewer Margin="20,10,0,43" Grid.ColumnSpan="4">
+                        <!-- WrapPanel to display images -->
+                        <WrapPanel x:Name="spPictures">
+                            <!-- Images will be added here dynamically -->
+                        </WrapPanel>
                     </ScrollViewer>
                     <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="20,975,0,0" VerticalAlignment="Top" Width="84" Height="28" Click="btnRefresh_Click" BorderBrush="Black" Background="#FF11FF00" FontSize="20" RenderTransformOrigin="2.402,-5.669"/>
                 </Grid>
@@ -33,29 +36,24 @@
 
             <TabItem Header="Kassa">
                 <Grid Background="#F4F4F4" Margin="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="8*"/>
-                        <ColumnDefinition Width="11*"/>
-                        <ColumnDefinition Width="1885*"/>
-                    </Grid.ColumnDefinitions>
+                    <!-- Foto-id Label and TextBox -->
+                    <Label Content="Foto-id:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="24" Width="200" FontWeight="Bold" Foreground="#333"/>
+                    <TextBox x:Name="tbFotoId" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="325" Height="30" Padding="10,0" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1"/>
 
-                    <Label Content="Foto-id:" HorizontalAlignment="Left" Margin="72,192,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="3"/>
-                    <TextBox x:Name="tbFotoId" HorizontalAlignment="Left" Margin="72,221,0,0" VerticalAlignment="Top" Width="325" Height="22" Grid.Column="3"/>
+                    <!-- Product Label and ComboBox -->
+                    <Label Content="Product:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,80,0,0" Height="23" Width="200" FontWeight="Bold" Foreground="#333"/>
+                    <ComboBox x:Name="cbProducts" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Width="325" Height="30" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1" Padding="10,0"/>
 
-                    <Label Content="Product:" HorizontalAlignment="Left" Margin="72,258,0,0" VerticalAlignment="Top" Height="23" Width="255" Grid.Column="3"/>
-                    <ComboBox x:Name="cbProducts" HorizontalAlignment="Left" Margin="72,286,0,0" VerticalAlignment="Top" Width="325" Grid.Column="3"/>
+                    <!-- Aantal Label and TextBox -->
+                    <Label Content="Aantal:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,150,0,0" Height="24" Width="200" FontWeight="Bold" Foreground="#333"/>
+                    <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="325" Height="30" Padding="10,0" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1"/>
 
-                    <Label Content="Aantal:" HorizontalAlignment="Left" Margin="72,326,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="3"/>
-                    <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Margin="72,356,0,0" VerticalAlignment="Top" Width="325" Height="22" Grid.Column="3"/>
+                    <!-- Buttons -->
+                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="150" Height="40" Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#388E3C" BorderThickness="1" Padding="5,0"/>
+                    <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="180,220,0,0" VerticalAlignment="Top" Width="150" Height="40" Background="#FF5722" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#D32F2F" BorderThickness="1" Padding="5,0"/>
 
-                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="72,383,0,0" VerticalAlignment="Top" Width="147" Click="btnShopAdd_Click" Grid.Column="3"/>
-                    <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="250,383,0,0" VerticalAlignment="Top" Width="147" Click="btnShopReset_Click" Grid.Column="3"/>
-
-                    <Label x:Name="lbPrices" Content="" HorizontalAlignment="Left" Margin="1036,174,0,0" VerticalAlignment="Top" Height="536" Width="695" Grid.Column="3"/>
-                    <Label x:Name="lbReceipt" Content="" HorizontalAlignment="Left" Margin="72,442,0,0" VerticalAlignment="Top" Height="392" Width="325" Grid.Column="3"/>
-
-                    <Button x:Name="btnSave" Content="Bon Opslaan" HorizontalAlignment="Left" Margin="0,998,0,0" VerticalAlignment="Top" Width="83" Height="28" Click="btnSave_Click" Grid.ColumnSpan="3" Grid.Column="1"/>
+                    <!-- Save Button -->
+                    <Button x:Name="btnSave" Content="Bon Opslaan" HorizontalAlignment="Left" Margin="10,700,0,0" VerticalAlignment="Top" Width="100" Height="40" Background="#2196F3" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#1976D2" BorderThickness="1" Padding="5,0"/>
                 </Grid>
             </TabItem>
 
