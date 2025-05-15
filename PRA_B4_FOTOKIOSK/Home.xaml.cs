@@ -40,6 +40,13 @@ namespace PRA_B4_FOTOKIOSK
             PictureController.Start();
             ShopController.Start();
             SearchController.Start();
+
+            InitializeComponent();
+            ShopManager.Instance = this;
+
+            ShopController controller = new ShopController();
+            ShopController.Window = this;
+            controller.Start(); // <-- belangrijk: dit initialiseert de producten!
         }
 
         // Event handler voor het klikken op de knop "Toevoegen"

@@ -1,6 +1,7 @@
 ﻿using PRA_B4_FOTOKIOSK.models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,9 @@ namespace PRA_B4_FOTOKIOSK.magie
             Instance.lbPrices.Content = text;
         }
 
-        public static void AddShopPriceList(string text)
+        public static void AddShopPriceList(string Name, decimal Price, string Description)
         {
-            Instance.lbPrices.Content = Instance.lbPrices.Content + text;
+            Instance.lbPrices.Content += $"{Name} - €{Price:F2} - {Description}\n";
         }
 
         public static void SetShopReceipt(string text)
