@@ -49,7 +49,7 @@
                     <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="325" Height="30" Padding="10,0" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1"/>
 
                     <!-- Buttons -->
-                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="150" Height="40" Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#388E3C" BorderThickness="1" Padding="5,0"/>
+                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="150" Height="40" Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#388E3C" BorderThickness="1" Padding="5,0" Click="btnShopAdd_Click_1"/>
                     <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="180,220,0,0" VerticalAlignment="Top" Width="150" Height="40" Background="#FF5722" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#D32F2F" BorderThickness="1" Padding="5,0"/>
 
                     <!-- Save Button -->
