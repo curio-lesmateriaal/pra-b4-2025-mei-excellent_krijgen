@@ -16,10 +16,27 @@ namespace PRA_B4_FOTOKIOSK
 
             LoadPictures(currentDayNumber);
 
-            // Voorbeeld producten vullen (pas aan naar eigen data)
-            cbProducts.Items.Add("Product A");
-            cbProducts.Items.Add("Product B");
-            cbProducts.Items.Add("Product C");
+            // Maak de controllers aan
+            ShopController = new ShopController();
+            PictureController = new PictureController();
+            SearchController = new SearchController();
+
+            // Koppel de controllers aan het huidige Window
+            ShopController.Window = this;
+            PictureController.Window = this;
+            SearchController.Window = this;
+
+            // Start de pagina's via de controllers
+            PictureController.Start();
+            ShopController.Start();
+            SearchController.Start();
+
+            InitializeComponent();
+            ShopManager.Instance = this;
+
+            ShopController controller = new ShopController();
+            ShopController.Window = this;
+            controller.Start(); // <-- belangrijk: dit initialiseert de producten!
         }
 
         private void LoadPictures(int dayNumber)

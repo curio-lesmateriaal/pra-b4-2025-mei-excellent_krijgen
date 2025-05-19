@@ -1,6 +1,8 @@
 ﻿using PRA_B4_FOTOKIOSK.models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +20,33 @@ namespace PRA_B4_FOTOKIOSK.magie
         // Zet de prijs lijst in de Label van de Home window
         public static void SetShopPriceList(string text)
         {
-            if (Instance != null)
+            Instance.lbPrices.Content = text;
+        }
+
+        public static void AddShopPriceList(string Name, decimal Price, string Description)
+        {
+            Instance.lbPrices.Content += $"{Name} - €{Price:F2} - {Description}\n";
+        }
+
+        public static void SetShopReceipt(string text)
+        {
+            Instance.lbReceipt.Content = text;
+        }
+
+        public static string GetShopReceipt()
+        {
+            return (string)Instance.lbReceipt.Content;
+        }
+
+        public static void AddShopReceipt(string text)
+        {
+            SetShopReceipt(GetShopReceipt() + text);
+        }
+
+        public static void UpdateDropDownProducts()
+        {
+            Instance.cbProducts.Items.Clear();
+            foreach (KioskProduct item in Products)
             {
                 Instance.lbPrices.Content = text;
             }

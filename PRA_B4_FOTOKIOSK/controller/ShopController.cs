@@ -1,19 +1,22 @@
 ﻿using PRA_B4_FOTOKIOSK.magie;
 using PRA_B4_FOTOKIOSK.models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PRA_B4_FOTOKIOSK.controller
 {
     public class ShopController
     {
-        public static Home Window { get; set; }
+        public static Home Window { get; set; } 
 
         public void Start()
         {
-            ShopManager.SetShopPriceList("Prijzen:\nFoto 10x15: €2.55");
+            ShopManager.SetShopPriceList("Prijzen:\nFoto 10x15: €2,55    Beschrijving: Glanzende fotoprint 10x15 cm\nFoto 20x30: €4,99   Beschrijving: Grote fotoprint 20x30 cm\nPasfoto: €5,00   Beschrijving: Set van 4 officiële pasfoto's");
             ShopManager.SetShopReceipt("Eindbedrag\n€");
-            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 10x15" });
+            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 10x15", Price = 2.55m, Description = "Glanzende fotoprint 10x15 cm" });
+            ShopManager.Products.Add(new KioskProduct() { Name = "Foto 20x30", Price = 4.99m, Description = "Grote fotoprint 20x30 cm" });
+            ShopManager.Products.Add(new KioskProduct() { Name = "Pasfoto", Price = 5.00m, Description = "Set van 4 officiële pasfoto's" });
             ShopManager.UpdateDropDownProducts();
         }
 
@@ -25,8 +28,8 @@ namespace PRA_B4_FOTOKIOSK.controller
 
             if (fotoId == null || amount == null || product == null) return;
 
-            double prijsPerStuk = 2.55;
-            double totaal = prijsPerStuk * amount.Value;
+            decimal prijsPerStuk = product.Price;
+            decimal totaal = prijsPerStuk * amount.Value;
 
             ShopManager.AddShopReceipt($"\n{product.Name} x{amount} = €{totaal:F2}");
 
