@@ -1,110 +1,115 @@
-﻿using PRA_B4_FOTOKIOSK.controller;
-using PRA_B4_FOTOKIOSK.magie;
-using PRA_B4_FOTOKIOSK.models;
-using System;
+﻿using System;
+using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace PRA_B4_FOTOKIOSK
 {
-    /// <summary>
-    /// Interaction logic for Home.xaml
-    /// </summary>
     public partial class Home : Window
     {
-        // Declareer de controllers
-        public ShopController ShopController { get; set; }
-        public PictureController PictureController { get; set; }
-        public SearchController SearchController { get; set; }
+        private int currentDayNumber = 0; // 0 = Zondag
 
         public Home()
         {
-            // Bouw de UI
             InitializeComponent();
 
-            // Controleer of de Manager instantie correct is (zorg ervoor dat deze statisch is)
-            PictureManager.Instance = this;
-            ShopManager.Instance = this;
-            SearchController.Window = this;
+            LoadPictures(currentDayNumber);
 
-            // Maak de controllers aan
-            ShopController = new ShopController();
-            PictureController = new PictureController();
-            SearchController = new SearchController();
-
-            // Koppel de controllers aan het huidige Window
-            ShopController.Window = this;
-            PictureController.Window = this;
-            SearchController.Window = this;
-
-            // Start de pagina's via de controllers
-            PictureController.Start();
-            ShopController.Start();
-            SearchController.Start();
+            // Voorbeeld producten vullen (pas aan naar eigen data)
+            cbProducts.Items.Add("Product A");
+            cbProducts.Items.Add("Product B");
+            cbProducts.Items.Add("Product C");
         }
 
-        // Event handler voor het klikken op de knop "Toevoegen"
-        private void btnShopAdd_Click(object sender, RoutedEventArgs e)
+        private void LoadPictures(int dayNumber)
         {
-            try
+            spPictures.Children.Clear();
+
+            string basePath = @"C:\aaa_blok_B\blok_b\pra\pra-b4-2025-mei-excellent_krijgen\PRA_B4_FOTOKIOSK\fotos\";
+            string[] days = { "Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag" };
+
+            if (dayNumber < 0 || dayNumber > 6)
             {
-                ShopController.AddButtonClick();  // Zorg ervoor dat je logica voor toevoegen is geïmplementeerd in de controller
+                MessageBox.Show("Ongeldig dagnummer!");
+                return;
             }
-            catch (Exception ex)
+
+            string folderName = $"{dayNumber}_{days[dayNumber]}";
+            string photosFolder = Path.Combine(basePath, folderName);
+
+            if (!Directory.Exists(photosFolder))
             {
-                MessageBox.Show($"Er is een fout opgetreden bij het toevoegen: {ex.Message}");
+                MessageBox.Show("Foto map bestaat niet: " + photosFolder);
+                return;
+            }
+
+            string[] files = Directory.GetFiles(photosFolder, "*.jpg");
+
+            foreach (string file in files)
+            {
+                try
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(file);
+                    bitmap.DecodePixelWidth = 550;
+                    bitmap.DecodePixelHeight = 308;
+                    bitmap.EndInit();
+
+                    Image image = new Image
+                    {
+                        Source = bitmap,
+                        Width = 550,
+                        Height = 308,
+                        Margin = new Thickness(5)
+                    };
+
+                    spPictures.Children.Add(image);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Fout bij laden foto: " + ex.Message);
+                }
             }
         }
 
-        // Event handler voor het klikken op de knop "Resetten"
-        private void btnShopReset_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ShopController.ResetButtonClick();  // Zorg ervoor dat je logica voor resetten is geïmplementeerd in de controller
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Er is een fout opgetreden bij het resetten: {ex.Message}");
-            }
-        }
-
-        // Event handler voor het klikken op de knop "Vernieuwen"
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                PictureController.RefreshButtonClick();  // Zorg ervoor dat je logica voor vernieuwen is geïmplementeerd in de controller
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Er is een fout opgetreden bij het vernieuwen: {ex.Message}");
-            }
+            LoadPictures(currentDayNumber);
         }
 
-        // Event handler voor het klikken op de knop "Bon Opslaan"
+        private void btnNextDay_Click(object sender, RoutedEventArgs e)
+        {
+            currentDayNumber = (currentDayNumber + 1) % 7;
+            LoadPictures(currentDayNumber);
+        }
+
+        private void btnPreviousDay_Click(object sender, RoutedEventArgs e)
+        {
+            currentDayNumber = (currentDayNumber - 1 + 7) % 7;
+            LoadPictures(currentDayNumber);
+        }
+
+        // Hier kan je ook je andere event handlers voor kassa en zoeken zetten
+        private void btnShopAdd_Click(object sender, RoutedEventArgs e)
+        {
+            // Voeg toe logica hier
+        }
+
+        private void btnShopReset_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset logica hier
+        }
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ShopController.SaveButtonClick();  // Zorg ervoor dat je logica voor opslaan is geïmplementeerd in de controller
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Er is een fout opgetreden bij het opslaan: {ex.Message}");
-            }
+            // Bon opslaan logica hier
         }
 
-        // Event handler voor het klikken op de knop "Zoeken"
         private void btnZoeken_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                SearchController.SearchButtonClick();  // Zorg ervoor dat je logica voor zoeken is geïmplementeerd in de controller
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Er is een fout opgetreden bij het zoeken: {ex.Message}");
-            }
+            // Zoek logica hier
         }
     }
 }

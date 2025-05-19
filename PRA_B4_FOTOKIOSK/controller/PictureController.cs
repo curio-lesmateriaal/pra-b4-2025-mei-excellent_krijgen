@@ -4,54 +4,48 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PRA_B4_FOTOKIOSK.controller
 {
     public class PictureController
     {
-        // De window die we laten zien op het scherm
         public static Home Window { get; set; }
-
-        // De lijst met foto's die we laten zien
         public List<KioskPhoto> PicturesToDisplay = new List<KioskPhoto>();
 
-        // Start methode die wordt aangeroepen wanneer de foto pagina opent
         public void Start()
         {
-            try
-            {
-                // Initializeer de lijst met foto's
-                // WAARSCHUWING. ZONDER FILTER LAADT DIT ALLES!
-                PicturesToDisplay.Clear(); // Clear the previous list of pictures
+            PicturesToDisplay.Clear();
 
-                foreach (string dir in Directory.GetDirectories(@"../../../fotos"))
+            int todayDayNumber = (int)DateTime.Now.DayOfWeek;
+            DateTime now = DateTime.Now;
+
+            foreach (string dir in Directory.GetDirectories(@"../../../fotos"))
+            {
+                string folderName = Path.GetFileName(dir);
+                string[] folderParts = folderName.Split('_');
+
+                if (folderParts.Length > 0 && int.TryParse(folderParts[0], out int folderDayNumber))
                 {
-                    foreach (string file in Directory.GetFiles(dir))
+                    if (folderDayNumber == todayDayNumber)
                     {
-                        // Filter for image files if necessary (e.g., only .jpg, .png)
-                        if (file.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || file.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                        foreach (string file in Directory.GetFiles(dir))
                         {
-                            PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
+                            DateTime created = File.GetCreationTime(file);
+
+                            TimeSpan verschil = now - created;
+                            if (verschil.TotalMinutes >= 5 && verschil.TotalMinutes <= 30)
+                            {
+                                PicturesToDisplay.Add(new KioskPhoto() { Id = 0, Source = file });
+                            }
                         }
                     }
                 }
-
-                // Update de foto's
-                PictureManager.UpdatePictures(PicturesToDisplay);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception (could be expanded for specific file errors, etc.)
-                Console.WriteLine($"Error while loading photos: {ex.Message}");
             }
         }
 
-        // Wordt uitgevoerd wanneer er op de Refresh knop is geklikt
         public void RefreshButtonClick()
         {
-            // Reload the pictures when the refresh button is clicked
+            PicturesToDisplay.Clear();
             Start();
         }
     }
