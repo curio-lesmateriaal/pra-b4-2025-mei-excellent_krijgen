@@ -3,40 +3,41 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using PRA_B4_FOTOKIOSK.controller;
+using PRA_B4_FOTOKIOSK.magie;
 
 namespace PRA_B4_FOTOKIOSK
 {
     public partial class Home : Window
     {
-        private int currentDayNumber = 0; // 0 = Zondag
+        private int currentDayNumber;
+
+        public ShopController ShopController { get; set; }
+        public PictureController PictureController { get; set; }
+        public SearchController SearchController { get; set; }
 
         public Home()
         {
             InitializeComponent();
 
-            LoadPictures(currentDayNumber);
+            // Init currentDayNumber op vandaag (DayOfWeek zondag=0, maandag=1 ...)
+            currentDayNumber = (int)DateTime.Now.DayOfWeek;
 
-            // Maak de controllers aan
             ShopController = new ShopController();
             PictureController = new PictureController();
             SearchController = new SearchController();
 
-            // Koppel de controllers aan het huidige Window
             ShopController.Window = this;
             PictureController.Window = this;
             SearchController.Window = this;
 
-            // Start de pagina's via de controllers
             PictureController.Start();
             ShopController.Start();
             SearchController.Start();
 
-            InitializeComponent();
             ShopManager.Instance = this;
 
-            ShopController controller = new ShopController();
-            ShopController.Window = this;
-            controller.Start(); // <-- belangrijk: dit initialiseert de producten!
+            LoadPictures(currentDayNumber);
         }
 
         private void LoadPictures(int dayNumber)
@@ -91,6 +92,11 @@ namespace PRA_B4_FOTOKIOSK
             }
         }
 
+        private void btnShopAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ShopController?.AddToCart();
+        }
+
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             LoadPictures(currentDayNumber);
@@ -108,25 +114,19 @@ namespace PRA_B4_FOTOKIOSK
             LoadPictures(currentDayNumber);
         }
 
-        // Hier kan je ook je andere event handlers voor kassa en zoeken zetten
-        private void btnShopAdd_Click(object sender, RoutedEventArgs e)
-        {
-            // Voeg toe logica hier
-        }
-
         private void btnShopReset_Click(object sender, RoutedEventArgs e)
         {
-            // Reset logica hier
+            // reset logica hier
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Bon opslaan logica hier
+            // opslaan logica hier
         }
 
         private void btnZoeken_Click(object sender, RoutedEventArgs e)
         {
-            // Zoek logica hier
+            // zoek logica hier
         }
     }
 }
