@@ -1,7 +1,5 @@
 ﻿using PRA_B4_FOTOKIOSK.models;
-using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 
 namespace PRA_B4_FOTOKIOSK.magie
 {

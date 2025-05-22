@@ -50,27 +50,25 @@
                         <ColumnDefinition Width="1831*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Foto-id:" HorizontalAlignment="Left" Margin="72,192,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="5"/>
-                    <TextBox x:Name="tbFotoId" HorizontalAlignment="Left" Margin="72,221,0,0" VerticalAlignment="Top" Width="325" Height="22" Grid.Column="5"/>
+                    <Label Content="Foto-id:" HorizontalAlignment="Left" Margin="72,192,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="5" FontWeight="Bold" Foreground="#333"/>
+                    <TextBox x:Name="tbFotoId" HorizontalAlignment="Left" Margin="72,221,0,0" VerticalAlignment="Top" Width="325" Height="30" Padding="10,0" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1" Grid.Column="5"/>
 
-                    <Label Content="Product:" HorizontalAlignment="Left" Margin="72,258,0,0" VerticalAlignment="Top" Height="23" Width="255" Grid.Column="5"/>
-                    <ComboBox x:Name="cbProducts" HorizontalAlignment="Left" Margin="72,286,0,0" VerticalAlignment="Top" Width="325" Grid.Column="5" Height="22"/>
+                    <Label Content="Product:" HorizontalAlignment="Left" Margin="72,258,0,0" VerticalAlignment="Top" Height="23" Width="255" Grid.Column="5" FontWeight="Bold" Foreground="#333"/>
+                    <ComboBox x:Name="cbProducts" HorizontalAlignment="Left" Margin="72,286,0,0" VerticalAlignment="Top" Width="325" Height="30" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1" Padding="10,0" Grid.Column="5"/>
 
+                    <Label Content="Aantal:" HorizontalAlignment="Left" Margin="72,326,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="5" FontWeight="Bold" Foreground="#333"/>
+                    <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Margin="72,356,0,0" VerticalAlignment="Top" Width="325" Height="30" Padding="10,0" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1" Grid.Column="5"/>
 
-                    <Label Content="Aantal:" HorizontalAlignment="Left" Margin="72,326,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="5"/>
-                    <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Margin="72,356,0,0" VerticalAlignment="Top" Width="325" Height="22" Grid.Column="5"/>
-
-
-                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="72,383,0,0" VerticalAlignment="Top" Width="147" Click="btnShopAdd_Click" Grid.Column="5" Height="40"/>
-                    <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="250,383,0,0" VerticalAlignment="Top" Width="147" Click="btnShopReset_Click" Grid.Column="5" Height="40"/>
-
+                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="72,383,0,0" VerticalAlignment="Top" Width="147" Height="40" Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#388E3C" BorderThickness="1" Padding="5,0" Click="btnShopAdd_Click" Grid.Column="5"/>
+                    <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="250,383,0,0" VerticalAlignment="Top" Width="147" Height="40" Background="#FF5722" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#D32F2F" BorderThickness="1" Padding="5,0" Click="btnShopReset_Click" Grid.Column="5"/>
 
                     <Label x:Name="lbPrices" Content="" HorizontalAlignment="Left" Margin="1036,174,0,0" VerticalAlignment="Top" Height="536" Width="695" Grid.Column="5"/>
                     <Label x:Name="lbReceipt" Content="" HorizontalAlignment="Left" Margin="72,442,0,0" VerticalAlignment="Top" Height="392" Width="325" Grid.Column="5"/>
 
-                    <Button x:Name="btnSave" Content="Bon Opslaan" HorizontalAlignment="Left" Margin="0,998,0,0" VerticalAlignment="Top" Width="83" Height="28" Click="btnSave_Click" Grid.ColumnSpan="5" Grid.Column="1"/>
+                    <Button x:Name="btnSave" Content="Bon Opslaan" HorizontalAlignment="Left" Margin="0,998,0,0" VerticalAlignment="Top" Width="83" Height="28" Background="#2196F3" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#1976D2" BorderThickness="1" Padding="5,0" Click="btnSave_Click" Grid.ColumnSpan="5" Grid.Column="1"/>
                 </Grid>
             </TabItem>
+
 
             <!-- ZOEKEN TAB -->
             <TabItem Header="Zoeken">

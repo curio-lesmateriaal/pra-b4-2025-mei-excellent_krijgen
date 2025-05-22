@@ -20,22 +20,17 @@ namespace PRA_B4_FOTOKIOSK
         {
             InitializeComponent();
 
-            // Init currentDayNumber op vandaag (DayOfWeek zondag=0, maandag=1 ...)
             currentDayNumber = (int)DateTime.Now.DayOfWeek;
 
             ShopController = new ShopController();
             PictureController = new PictureController();
             SearchController = new SearchController();
 
-            ShopController.Window = this;
-            PictureController.Window = this;
-            SearchController.Window = this;
+            ShopManager.Instance = this;
 
             PictureController.Start();
             ShopController.Start();
             SearchController.Start();
-
-            ShopManager.Instance = this;
 
             LoadPictures(currentDayNumber);
         }
@@ -46,6 +41,7 @@ namespace PRA_B4_FOTOKIOSK
 
             string basePath = @"C:\aaa_blok_B\blok_b\pra\pra-b4-2025-mei-excellent_krijgen\PRA_B4_FOTOKIOSK\fotos\";
             string[] days = { "Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag" };
+
 
             if (dayNumber < 0 || dayNumber > 6)
             {
@@ -94,7 +90,12 @@ namespace PRA_B4_FOTOKIOSK
 
         private void btnShopAdd_Click(object sender, RoutedEventArgs e)
         {
-            ShopController?.AddToCart();
+            ShopController?.AddButtonClick();
+        }
+
+        private void btnShopReset_Click(object sender, RoutedEventArgs e)
+        {
+            ShopController?.ResetButtonClick();
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -114,19 +115,28 @@ namespace PRA_B4_FOTOKIOSK
             LoadPictures(currentDayNumber);
         }
 
-        private void btnShopReset_Click(object sender, RoutedEventArgs e)
-        {
-            // reset logica hier
-        }
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // opslaan logica hier
+            try
+            {
+                string bonInhoud = ShopController.MaakBonTekst();
+
+                string documentenPad = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string bestandspad = Path.Combine(documentenPad, "kassabon.txt");
+
+                File.WriteAllText(bestandspad, bonInhoud);
+
+                MessageBox.Show("Bon opgeslagen in Documenten!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout bij opslaan bon: " + ex.Message);
+            }
         }
 
         private void btnZoeken_Click(object sender, RoutedEventArgs e)
         {
-            // zoek logica hier
+            // Search logic here if needed
         }
     }
 }
