@@ -42,7 +42,6 @@ namespace PRA_B4_FOTOKIOSK
             string basePath = @"C:\aaa_blok_B\blok_b\pra\pra-b4-2025-mei-excellent_krijgen\PRA_B4_FOTOKIOSK\fotos\";
             string[] days = { "Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag" };
 
-
             if (dayNumber < 0 || dayNumber > 6)
             {
                 MessageBox.Show("Ongeldig dagnummer!");
@@ -136,7 +135,7 @@ namespace PRA_B4_FOTOKIOSK
 
         private void btnZoeken_Click(object sender, RoutedEventArgs e)
         {
-            // Search logic here if needed
+            // Zoekfunctionaliteit indien nodig
         }
     }
 }
