@@ -20,6 +20,7 @@ namespace PRA_B4_FOTOKIOSK
         {
             InitializeComponent();
 
+
             currentDayNumber = (int)DateTime.Now.DayOfWeek;
 
             ShopController = new ShopController();
@@ -28,9 +29,13 @@ namespace PRA_B4_FOTOKIOSK
 
             ShopManager.Instance = this;
 
+
+
             PictureController.Start();
             ShopController.Start();
             SearchController.Start();
+
+
 
             LoadPictures(currentDayNumber);
         }
@@ -41,6 +46,7 @@ namespace PRA_B4_FOTOKIOSK
 
             string basePath = @"C:\aaa_blok_B\blok_b\pra\pra-b4-2025-mei-excellent_krijgen\PRA_B4_FOTOKIOSK\fotos\";
             string[] days = { "Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag" };
+
 
             if (dayNumber < 0 || dayNumber > 6)
             {
@@ -114,6 +120,11 @@ namespace PRA_B4_FOTOKIOSK
             LoadPictures(currentDayNumber);
         }
 
+
+
+
+
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -135,7 +146,7 @@ namespace PRA_B4_FOTOKIOSK
 
         private void btnZoeken_Click(object sender, RoutedEventArgs e)
         {
-            // Zoekfunctionaliteit indien nodig
+            // Search logic here if needed
         }
     }
 }

@@ -33,7 +33,7 @@
                     </ScrollViewer>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,510,0,-85" Grid.ColumnSpan="3">
-                        <Button x:Name="btnRefresh" Content="Refresh" Width="100" Height="40" Click="btnRefresh_Click" BorderBrush="Black" Background="#0DCC00" FontSize="20" RenderTransformOrigin="0.015,-3.622"/>
+                        <Button x:Name="btnRefresh" Content="Refresh" Width="100" Height="40" Click="btnRefresh_Click" BorderBrush="Black" Background="#FF11FF00" FontSize="16" RenderTransformOrigin="0.015,-3.622"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -59,8 +59,13 @@
                     <Label Content="Aantal:" HorizontalAlignment="Left" Margin="72,326,0,0" VerticalAlignment="Top" Height="24" Width="255" Grid.Column="5" FontWeight="Bold" Foreground="#333"/>
                     <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Margin="72,356,0,0" VerticalAlignment="Top" Width="325" Height="30" Padding="10,0" FontSize="14" BorderBrush="#8C8C8C" BorderThickness="1" Grid.Column="5"/>
 
-                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="72,400,0,0" VerticalAlignment="Top" Width="147" Height="40" Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#388E3C" BorderThickness="1" Padding="5,0" Click="btnShopAdd_Click" Grid.Column="5" RenderTransformOrigin="0.48,0.487"/>
-                    <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="250,400,0,0" VerticalAlignment="Top" Width="147" Height="40" Background="#FF5722" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#D32F2F" BorderThickness="1" Padding="5,0" Click="btnShopReset_Click" Grid.Column="5"/>
+                    <Button x:Name="btnShopAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="72,383,0,0" VerticalAlignment="Top" Width="147" Height="40" Background="#4CAF50" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#388E3C" BorderThickness="1" Padding="5,0" Click="btnShopAdd_Click" Grid.Column="5"/>
+                    <Button x:Name="btnShopReset" Content="Resetten" HorizontalAlignment="Left" Margin="250,383,0,0" VerticalAlignment="Top" Width="147" Height="40" Background="#FF5722" Foreground="White" FontSize="16" FontWeight="Bold" BorderBrush="#D32F2F" BorderThickness="1" Padding="5,0" Click="btnShopReset_Click" Grid.Column="5"/>
+
+
+
+
+
 
                     <Label x:Name="lbPrices" Content="" HorizontalAlignment="Left" Margin="1036,174,0,0" VerticalAlignment="Top" Height="536" Width="695" Grid.Column="5"/>
                     <Label x:Name="lbReceipt" Content="" HorizontalAlignment="Left" Margin="72,442,0,0" VerticalAlignment="Top" Height="392" Width="325" Grid.Column="5"/>
